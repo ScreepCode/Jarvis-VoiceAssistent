@@ -22,7 +22,7 @@ class VoiceAssistant(object):
             speech = sr.Microphone()
             with speech as source:
                 print("Jetzt sprechen!…")
-                audio = self.listener.adjust_for_ambient_noise(source)
+                self.listener.adjust_for_ambient_noise(source)
                 audio = self.listener.listen(source)
             try:
                 recog = self.listener.recognize_google(audio, language = 'en-us').lower()
@@ -40,7 +40,7 @@ class VoiceAssistant(object):
         speech = sr.Microphone()
         with speech as source:
             print("Jetzt sprechen!…")
-            audio = self.listener.adjust_for_ambient_noise(source)
+            self.listener.adjust_for_ambient_noise(source)
             audio = self.listener.listen(source)
         try:
             command = self.listener.recognize_google(audio, language = 'de-DE').lower()
