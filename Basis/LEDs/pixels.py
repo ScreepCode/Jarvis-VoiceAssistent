@@ -4,25 +4,17 @@ import time
 
 from gpiozero import LED
 
-import apa102
+from Basis.LEDs import apa102 # pylint: disable=import-error
 
 PINK = 0x7C1645
 LILA = 0x8F20B6
 
 class LEDSteuerung(object):
     def __init__(self):
-        self.strip = apa102.APA102(12, 50)
+        self.strip = apa102.APA102(12, 10)
 
         self.powerOn()
         self.clearStrip()
-
-        self.wakeup()
-        time.sleep(2)
-        self.think()
-        time.sleep(2)
-        self.speak()
-        time.sleep(2)
-        self.sleep()
 
     def powerOn(self):
         self.power = LED(5)
@@ -72,5 +64,3 @@ class LEDSteuerung(object):
             self.strip.set_pixel_rgb((6+x)%12, LILA, bright_percent=brightness)
             self.strip.show()
             time.sleep(0.05)
-
-LS = LEDSteuerung()
