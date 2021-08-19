@@ -15,37 +15,17 @@ class VoiceAssistant(object):
         # self.engine.say(text)
         # self.engine.runAndWait()
 
-    def take_command(self):
+    def recognition(self, language="de-DE"):
         #WakeUP
-        wakeUp = False
-        while wakeUp == False:
-            speech = sr.Microphone()
-            with speech as source:
-                print("Jetzt sprechen!…")
-                self.listener.adjust_for_ambient_noise(source)
-                audio = self.listener.listen(source)
-            try:
-                recog = self.listener.recognize_google(audio, language = 'en-us').lower()
-
-                print("Erkannt: " + recog)
-                if 'jarvis' or 'chavez' in recog:
-                    wakeUp = True
-                        
-            except sr.UnknownValueError:
-                self.talk("Google versteht kein Audio")
-            except sr.RequestError as e:
-                self.talk("Google Service nicht erreichbar; {0}".format(e))
-
-        #Befehl bekommen
         speech = sr.Microphone()
         with speech as source:
             print("Jetzt sprechen!…")
             self.listener.adjust_for_ambient_noise(source)
             audio = self.listener.listen(source)
         try:
-            command = self.listener.recognize_google(audio, language = 'de-DE').lower()
-            print("Befehl: " + command)
-            return command
+            recog = self.listener.recognize_google(audio, language = language).lower()
+            print("Erkannt: " + recog)
+            return recog
                     
         except sr.UnknownValueError:
             self.talk("Google versteht kein Audio")
