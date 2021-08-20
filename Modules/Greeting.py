@@ -1,4 +1,3 @@
 
-def greet():
-    if __name__ == '__main__':
-        print("Hallo")
+def greet(args):
+    print("Hallo Niklas ^^")

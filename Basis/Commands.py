@@ -7,12 +7,12 @@ class Cmd(object):
         self.module = module
 
 cmds = [
-    Cmd(["hallo", "hey", "hi", "moin"], Greeting.greet()), 
-    Cmd(["test"], Test.ausgabe())
+    Cmd(["hallo", "hey", "hi", "moin"], Greeting.greet), 
+    Cmd(["test"], Test.ausgabe)
 ]
 
 
 def performCommand(command):
     for cmd in cmds:
         if command in cmd.callables:
-            cmd.module
+            cmd.module(command)
