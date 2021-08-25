@@ -34,7 +34,7 @@ class LEDSteuerung(object):
             time.sleep(0.03)
 
     def think(self):
-        for x in range(30):
+        for x in range(24):
             self.strip.set_pixel_rgb(x%12, PINK)
             self.strip.set_pixel_rgb((6+x)%12, LILA)
             self.strip.show()
