@@ -21,7 +21,7 @@ cmds = [
     Cmd(["spotify"], Spotify.SP.startPlaying, False),
     Cmd(["pause", "stopp"], Spotify.SP.pause, False),
     Cmd(["überspringen", "nächstes"], Spotify.SP.skip, False),
-    Cmd(["play", "spiele"], Spotify.SP.playTrack, True),
+    Cmd(["play", "spiele"], Spotify.SP.playInQueue, True),
     Cmd(["interpret"], Spotify.SP.getAktArtist, False),
     Cmd(["song", "name"], Spotify.SP.getAktSong, False)
 ]

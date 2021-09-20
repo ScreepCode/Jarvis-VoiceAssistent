@@ -55,6 +55,7 @@ class Spotify(object):
     def playInQueue(self, name):
         uri = self.getSongUri(name)
         self.client.add_to_queue(uri)
+        self.skip()
 
     def startPlaylist(self, uri):
         self.client.start_playback(context_uri=uri)
