@@ -6,6 +6,10 @@ import time
 class VoiceAssistant(object):
     def __init__(self, main):
         self.listener = sr.Recognizer()
+        self.listener.dynamic_energy_threshold = True
+        self.listener.energy_threshold = 6000
+        self.listener.phrase_threshold = 0.2
+        self.listener.non_speaking_duration = 0.4
         self.engine = pyttsx3.init()
         self.voices = self.engine.getProperty('voices')
         self.engine.setProperty('voice', self.voices[0].id)
@@ -21,6 +25,7 @@ class VoiceAssistant(object):
         with speech as source:
             print("Jetzt sprechen!…")
             self.listener.adjust_for_ambient_noise(source)
+            # self.listener.dynamic_energy_threshold = True
             audio = self.listener.listen(source)
         try:
             recog = self.listener.recognize_google(audio, language = language).lower()
