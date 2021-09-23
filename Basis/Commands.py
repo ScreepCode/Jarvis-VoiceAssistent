@@ -1,4 +1,4 @@
-from Modules import Greeting, Test, Spotify, HomeAssistant
+from Modules import Greeting, Test, Spotify, HomeAssistant, Webunits
 
 
 class Cmd(object):
@@ -30,8 +30,11 @@ cmds = [
     Cmd(["zimmer aus", "zimmer dunkel"], HomeAssistant.HA.zimmerAus, False),
     Cmd(["warmes final", "schreibtisch an", "schreibtischlampe an"], HomeAssistant.HA.schreibTischAn, False),
     Cmd(["lampen aus", "schreibtisch aus", "schreibtischlampe aus"], HomeAssistant.HA.schreibTischAus, False),
-    Cmd(["starte pc", "pc an", ""], HomeAssistant.HA.wakeOnLanTower, False),
+    Cmd(["starte pc", "pc an"], HomeAssistant.HA.wakeOnLanTower, False),
     Cmd(["anlage", "steckdose"], HomeAssistant.HA.anlageSwitch, False),
+
+    # WebUntis
+    Cmd(["stundenplan"], Webunits.WU.getDayTimeTable, False),
 ]
 
 
