@@ -20,18 +20,21 @@ class VoiceAssistant(object):
         # self.engine.runAndWait()
 
     def recognition(self, language="de-DE"):
-        #WakeUP
         speech = sr.Microphone()
         with speech as source:
             print("Jetzt sprechen!…")
             self.listener.adjust_for_ambient_noise(source)
-            # self.listener.dynamic_energy_threshold = True
-            audio = self.listener.listen(source)
+            
+            try:
+                audio = self.listener.listen(source,timeout=10)
+            except sr.WaitTimeoutError:
+                return ""
+        
         try:
             recog = self.listener.recognize_google(audio, language = language).lower()
             print("Erkannt: " + recog)
             return recog
-                    
+            
         except sr.UnknownValueError:
             self.talk("Google versteht kein Audio")
         except sr.RequestError as e:
