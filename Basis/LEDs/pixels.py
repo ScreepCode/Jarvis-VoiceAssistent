@@ -34,13 +34,15 @@ class LEDSteuerung(object):
             time.sleep(0.03)
 
     def think(self):
-        for x in range(24):
-            self.strip.set_pixel_rgb(x%12, PINK)
-            self.strip.set_pixel_rgb((6+x)%12, LILA)
-            self.strip.show()
-            time.sleep(0.08)
+        while True:
+            for x in range(24):
+                self.strip.set_pixel_rgb(x%12, PINK)
+                self.strip.set_pixel_rgb((6+x)%12, LILA)
+                self.strip.show()
+                time.sleep(0.08)
 
     def speak(self):
+        
         for x in range(6):
             self.strip.set_pixel_rgb(x*2, PINK)
             self.strip.show()
@@ -49,13 +51,14 @@ class LEDSteuerung(object):
             self.strip.show()
             time.sleep(0.05)
 
-        for x in range(900):
-            brightness = abs(math.cos(math.radians(1*x))*80)+20
-            for x in range(6):
-                self.strip.set_pixel_rgb(x*2, PINK, bright_percent=brightness)
-                self.strip.set_pixel_rgb(x*2+1, LILA, bright_percent=brightness)
-            self.strip.show()
-            time.sleep(0.01)
+        while True:
+            for x in range(900):
+                brightness = abs(math.cos(math.radians(1*x))*80)+20
+                for x in range(6):
+                    self.strip.set_pixel_rgb(x*2, PINK, bright_percent=brightness)
+                    self.strip.set_pixel_rgb(x*2+1, LILA, bright_percent=brightness)
+                self.strip.show()
+                time.sleep(0.01)
 
     def sleep(self):
         for x in range(16):

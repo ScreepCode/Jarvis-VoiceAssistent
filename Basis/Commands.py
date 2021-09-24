@@ -1,5 +1,6 @@
 from Modules import Greeting, Test, Spotify, HomeAssistant, Webunits
-
+import multiprocessing
+import time
 
 class Cmd(object):
     def __init__(self, callables, module, sendCommand):
@@ -38,11 +39,30 @@ cmds = [
 ]
 
 
-def performCommand(command):
+def performCommand(main, command):
+    thinkThread = multiprocessing.Process(target=main.pixels.think)
+    thinkThread.start()
+    
     for cmdlist in cmds:
         for cmd in cmdlist.callables:
             if cmd in command:
+                response = ""
                 if(cmdlist.sendCommand):
-                    cmdlist.module(command.replace(cmd, ""))
+                    response = cmdlist.module(command.replace(cmd, ""))
                 else:
-                    cmdlist.module()
+                    response = cmdlist.module()
+                thinkThread.terminate()
+                time.sleep(0.2)
+                thinkThread.close()
+
+
+                speakThread = multiprocessing.Process(target=main.pixels.speak)
+                speakThread.start()
+                if(response != ""):
+                    main.VA.talk(response)
+                speakThread.terminate()
+                time.sleep(0.2)
+                speakThread.close()
+                
+
+    main.pixels.sleep()

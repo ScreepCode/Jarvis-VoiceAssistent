@@ -31,13 +31,10 @@ class Jarvis(object):
             while(self.recognize):
                 recog = self.VA.recognition(language="de-DE")
                 if recog != None:
-                    self.pixels.think()
-                    # Command.performCommand(self, recog)
-                    Command.performCommand(recog)
+                    Command.performCommand(self, recog)
                     
-                    self.recognize = False
                     self.sleep = True
-                    self.pixels.sleep()
+                    self.recognize = False
 
 
 
