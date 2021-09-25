@@ -3,19 +3,19 @@ import multiprocessing
 import time
 
 class Cmd(object):
+    """ Command for Voice Assistant
+        Parameters:
+            - callables -> Words for Recognition
+            - module -> Which Module will be called
+            - sendCommand -> If the module need the command
+    """
     def __init__(self, callables, module, sendCommand):
-        """ Command for Voice Assistant
-            Parameters:
-                - callables -> Words for Recognition
-                - module -> Which Module will be called
-                - sendCommand -> If the module need the command
-        """
         self.callables = callables
         self.module = module
         self.sendCommand = sendCommand
 
 cmds = [
-    Cmd(["hallo", "hey", "hi", "moin"], Greeting.greet, True), 
+    Cmd(["hallo", "hey", "hi", "moin"], Greeting.G.greet, False), 
     Cmd(["test"], Test.ausgabe, True),
 
     # SPOTIFY
