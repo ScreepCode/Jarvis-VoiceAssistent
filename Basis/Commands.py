@@ -1,4 +1,4 @@
-from Modules import Greeting, Test, Spotify, HomeAssistant, Webunits
+from Modules import Greeting, Test, Spotify, HomeAssistant, Webunits, NewsAPI
 import multiprocessing
 import time
 
@@ -34,8 +34,14 @@ cmds = [
     Cmd(["starte pc", "pc an"], HomeAssistant.HA.wakeOnLanTower, False),
     Cmd(["anlage", "steckdose"], HomeAssistant.HA.anlageSwitch, False),
 
-    # WebUntis
+    # WEBUNTIS
     Cmd(["stundenplan"], Webunits.WU.getDayTimeTable, False),
+
+    # NEWSAPI
+    Cmd(["nachrichten zu", "schlagzeilen über"], NewsAPI.NA.getArticlesAbout, True), 
+    Cmd(["aktuelle nachrichten"], NewsAPI.NA.getTopArticles, False), 
+    Cmd(["aktuelles", "was ist los", "schlagzeilen", "nachrichten"], NewsAPI.NA.getTopHeadlines, False), 
+    
 ]
 
 
@@ -58,11 +64,15 @@ def performCommand(main, command):
 
                 speakThread = multiprocessing.Process(target=main.pixels.speak)
                 speakThread.start()
-                if(response != ""):
+                if(response == None):
+                    print("KLICK!")
+                elif(response != ""):
                     main.VA.talk(response)
                 speakThread.terminate()
                 time.sleep(0.2)
                 speakThread.close()
-                
-
+    try:            
+        thinkThread.terminate()
+        thinkThread.close()
+    except: pass
     main.pixels.sleep()
