@@ -25,14 +25,23 @@ class VoiceAssistant(object):
         # self.engine.say(text)
         # self.engine.runAndWait()
 
-        # NEW
-        tts = gTTS(text=text, lang='de')
-        filename = "tmp.mp3"
-        tts.save(filename)
+        textArr = text.split("/PAUSE")
+        lenTextArr = len(textArr)
 
-        sound = AudioSegment.from_mp3("tmp.mp3")
-        play(sound.speedup(1.5))
-        os.remove("tmp.mp3")
+        for x in range(lenTextArr):
+            if(textArr[x] != ""):
+                tts = gTTS(text=textArr[x], lang='de')
+                filename = "tmp" + str(x) + ".mp3"
+                tts.save(filename)
+
+        for x in range(lenTextArr):
+            if(textArr[x] != ""):
+                sound = AudioSegment.from_mp3("tmp" + str(x) + ".mp3")
+                play(sound.speedup(1.25))
+                os.remove("tmp" + str(x) + ".mp3")
+                time.sleep(.2)
+            else:
+                time.sleep(.4)
 
     def recognition(self, language="de-DE"):
         speech = sr.Microphone()
