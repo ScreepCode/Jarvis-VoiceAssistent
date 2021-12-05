@@ -1,4 +1,4 @@
-from Modules import Greeting, Test, Spotify, HomeAssistant, Webunits, NewsAPI
+from Modules import Greeting, Test, Spotify, HomeAssistant, Webunits, NewsAPI, GCalendar
 import multiprocessing
 import time
 
@@ -42,6 +42,9 @@ cmds = [
     Cmd(["aktuelle nachrichten"], NewsAPI.NA.getTopArticles, False), 
     Cmd(["aktuelles", "was ist los", "schlagzeilen", "nachrichten"], NewsAPI.NA.getTopHeadlines, False), 
     
+    # CALENDAR
+    Cmd(["nächster geburtstag"], GCalendar.GC.getNextBirthday, False),
+    Cmd(["wann ist wieder"], GCalendar.GC.whenIsNext, True),
 ]
 
 
