@@ -74,7 +74,7 @@ class Spotify(object):
 
     def getAktArtist(self):
         track = self.client.current_user_playing_track()['item']
-        print(track["artists"][0]["name"])
+        return (track["artists"][0]["name"])
 
     def getDeviceID(self, name=MAINDEVICE):
         res = self.client.devices()
