@@ -1,4 +1,4 @@
-from Modules import Greeting, Test, Spotify, HomeAssistant, Webunits, NewsAPI, GCalendar
+from Modules import Greeting, Test, Spotify, HomeAssistant, Webunits, NewsAPI, GCalendar, GPeoples
 import multiprocessing
 import time
 
@@ -45,6 +45,9 @@ cmds = [
     # CALENDAR
     Cmd(["nächster geburtstag"], GCalendar.GC.getNextBirthday, False),
     Cmd(["wann ist wieder"], GCalendar.GC.whenIsNext, True),
+
+    # PEOPLES
+    Cmd(["wann hat"], GPeoples.GP.xyBirthday, True),
 ]
 
 
